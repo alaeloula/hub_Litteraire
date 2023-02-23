@@ -18,6 +18,7 @@ class livresFactory extends Factory
     {
         return [
             'title'=>fake()->word(),
+            'isenabled'=>fake()->boolean,
             'id_cat'=>category::factory()
         ];
     }

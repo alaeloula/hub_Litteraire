@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminGestionController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LivreController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+    // $user= \App\Models\User::first();
+    // dd($user->roles()->where('name','admin')->exists());
 });
 
 Route::get('/dashboard', function () {
@@ -27,5 +32,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+Route::middleware('role:admin')->group(function () {
+    Route::resource('livres', LivreController::class);
+    Route::resource('cats', CategoryController::class);
+    Route::get('/gestion', [AdminGestionController::class, 'user']);
 
-require __DIR__.'/auth.php';
+});
+
+require __DIR__ . '/auth.php';
