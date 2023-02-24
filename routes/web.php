@@ -39,4 +39,8 @@ Route::middleware('role:admin')->group(function () {
 
 });
 
+Route::resource('User', LivreController::class);
+
+
+
 require __DIR__ . '/auth.php';

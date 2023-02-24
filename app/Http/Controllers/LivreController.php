@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Livres;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class LivreController extends Controller
             // 'livres'=>Livres::with('category')->get()
             'livres'=>Livres::with('category')->get()->filter(function ($entry) {
                 return $entry->isenabled === 1;
-            }),
+            }),'productCategories'=>Category::all(),
         ]);
     }
 

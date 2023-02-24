@@ -8,7 +8,7 @@
     <form class="w-full max-w-sm" action="{{route('livres.store')}}" method="post">
         @csrf
         <div class="flex items-center border-b border-teal-500 py-2">
-            <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="CATEGORY" aria-label="Full name" name="title">
+            <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="livres" aria-label="Full name" name="title">
             @error('title')
             <span class="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
 			{{$message}}
