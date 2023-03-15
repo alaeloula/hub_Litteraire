@@ -1,13 +1,14 @@
 <?php
 
 namespace Database\Factories;
-use App\Models\Category;
+
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\livres>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\groupe>
  */
-class livresFactory extends Factory
+class groupeFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,9 +19,7 @@ class livresFactory extends Factory
     {
         return [
             'title'=>fake()->word(),
-            'isenabled'=>fake()->boolean,
-            'description'=>fake()->text(100),
-            'id_cat'=>category::factory()
+            'id_user'=>User::factory(),
         ];
     }
 }

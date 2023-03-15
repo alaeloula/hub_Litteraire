@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->boolean('isenabled');
+            $table->string('description');
             $table->timestamps();
             $table->foreignId('id_cat');
         });

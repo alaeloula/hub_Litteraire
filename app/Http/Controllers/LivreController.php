@@ -86,9 +86,9 @@ class LivreController extends Controller
      */
     public function destroy(string $id)
     {
-        $to_delete=Livres::findOrfail($id);
+        $to_archive=Livres::findOrfail($id);
         // dd($to_delete->isenabled);
-         $to_delete->update(['isenabled' => 0]);;
+         $to_archive->update(['isenabled' => 0]);;
         return redirect()->route('livres.index')->withSuccess("deleted");
     }
 }

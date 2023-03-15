@@ -1,9 +1,14 @@
 <?php
 
 use App\Http\Controllers\AdminGestionController;
+use App\Http\Controllers\GroupeController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\cloudinary;
 use App\Http\Controllers\LivreController;
+use App\Http\Controllers\messageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\LikeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +32,30 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+// Route::middleware(['auth', 'verified'])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('dashboard');
+//     })->name('dashboard');
+
+//     Route::get('/sessions', function () {
+//         return view('sessions', [
+//             'sessions' => DB::table('sessions')->get(),
+//         ]);
+//     })->name('sessions');
+// });
+
+
+
+
+
+
+
+
+
+
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -36,10 +65,21 @@ Route::middleware('role:admin')->group(function () {
     Route::resource('livres', LivreController::class);
     Route::resource('cats', CategoryController::class);
     Route::get('/gestion', [AdminGestionController::class, 'user']);
-
 });
 
-Route::resource('User', LivreController::class);
+Route::middleware('auth')->group(function () {
+    Route::get('/home', [UserController::class, 'index'])->name('/home');
+    Route::get('users/like/{id}', [LikeController::class, 'store'])->name('users/like');
+    Route::get('users/show/{id}', [UserController::class, 'show'])->name('users/show');
+
+    Route::get('/show/{id}', [GroupeController::class, 'show'])->name('groupe');
+    Route::get('/groupes', [GroupeController::class, 'index'])->name('groupes');
+    Route::post('/addgroupe', [GroupeController::class, 'addGroupe'])->name('/addgroupe');
+    Route::get('joinGroupe/{id}', [GroupeController::class, 'joinGroupe'])->name('joinGroupe');
+    Route::post('/groupe/{id}/message', [messageController::class, 'store'])->name('message.store');
+});
+
+Route::get('signature', [cloudinary::class, 'getsignature']);
 
 
 

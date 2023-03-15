@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\groupe;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,8 +16,8 @@ return new class extends Migration
         Schema::create('commments', function (Blueprint $table) {
             $table->id();
             $table->string('message');
-            $table->foreignId('id_user');
-            $table->foreignId('id_groupe');
+            $table->foreignIdFor(User::class);
+            $table->foreignIdfor(groupe::class);
             $table->timestamps();
         });
     }

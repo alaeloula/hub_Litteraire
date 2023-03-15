@@ -22,6 +22,8 @@
                                 <img src="https://picsum.photos/200" alt="livre 1" class="mb-4">
                                 <h2 class="text-lg font-bold mb-2">{{ $livre->title }}</h2>
                                 <p class="text-gray-700 text-base">Prix: 20€</p>
+                                <h2 class="text-lg font-bold mb-2">{{ $livre->category->title }}</h2>
+                                
                             </a>
                         </div>
                     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,5 +14,24 @@ class Livres extends Model
     {
         return $this->belongsTo(Category::class,'id_cat');
     }
-    
+    public function favorie()
+    {
+        return $this->belongsToMany(favorie::class);
+    }
+    public function reactions()
+    {
+        return $this->hasMany(reaction::class);
+    }
+
+    protected function isLiked(): Attribute
+    {
+        return new Attribute(
+             function () {
+                if (request()->user() ?? false) {
+                    return $this->reactions()->where('user_id', request()->user()->id)->exists();
+                }
+                return null;
+            }
+        );
+    }
 }
