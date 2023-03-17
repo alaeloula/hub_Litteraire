@@ -14,9 +14,9 @@ class Livres extends Model
     {
         return $this->belongsTo(Category::class,'id_cat');
     }
-    public function favorie()
+    public function favories()
     {
-        return $this->belongsToMany(favorie::class);
+        return $this->belongsToMany(User::class,'favories' ,'user_id','livres_id' );
     }
     public function reactions()
     {
@@ -34,4 +34,6 @@ class Livres extends Model
             }
         );
     }
+
+
 }

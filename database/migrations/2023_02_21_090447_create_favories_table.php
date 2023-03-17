@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Livres;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -13,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('favories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_user');
-            $table->foreignId('id_livre');
+            $table->foreignIdFor(User::class);
+            $table->foreignIdfor(Livres::class);
             $table->timestamps();
         });
     }

@@ -5,6 +5,7 @@ use App\Http\Controllers\GroupeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\cloudinary;
+use App\Http\Controllers\favorieController;
 use App\Http\Controllers\LivreController;
 use App\Http\Controllers\messageController;
 use App\Http\Controllers\ProfileController;
@@ -71,6 +72,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [UserController::class, 'index'])->name('/home');
     Route::get('users/like/{id}', [LikeController::class, 'store'])->name('users/like');
     Route::get('users/show/{id}', [UserController::class, 'show'])->name('users/show');
+
+    Route::get('users/favorie', [favorieController::class, 'index'])->name('users/favorie');
+
 
     Route::get('/show/{id}', [GroupeController::class, 'show'])->name('groupe');
     Route::get('/groupes', [GroupeController::class, 'index'])->name('groupes');
