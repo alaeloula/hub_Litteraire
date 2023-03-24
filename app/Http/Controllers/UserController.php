@@ -8,6 +8,7 @@ use App\Models\groupe;
 use App\Models\membre;
 use App\Models\reaction;
 use Illuminate\Http\Request;
+use Livewire\Component;
 
 class UserController extends Controller
 {
@@ -38,4 +39,13 @@ class UserController extends Controller
     {
         return view('users.show', ['livre' => Livres::with('category')->findOrFail($id)]);
     }
+
+
+    public function search(string $search)
+    {
+       $test= Livres::with('category')->where('title',$search)->get();
+       echo json_encode($test);
+    }
+
+
 }

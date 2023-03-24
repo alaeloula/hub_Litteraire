@@ -10,6 +10,8 @@ use App\Http\Controllers\LivreController;
 use App\Http\Controllers\messageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LikeController;
+use App\Http\Livewire\SearchLivres;
+use App\Http\Livewire\Catalog;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -72,6 +74,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/home', [UserController::class, 'index'])->name('/home');
     Route::get('users/like/{id}', [LikeController::class, 'store'])->name('users/like');
     Route::get('users/show/{id}', [UserController::class, 'show'])->name('users/show');
+    Route::get('users/search/{search}', [UserController::class, 'search'])->name('users/search');
 
     Route::get('users/favorie', [favorieController::class, 'index'])->name('users/favorie');
 
@@ -81,6 +84,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/addgroupe', [GroupeController::class, 'addGroupe'])->name('/addgroupe');
     Route::get('joinGroupe/{id}', [GroupeController::class, 'joinGroupe'])->name('joinGroupe');
     Route::post('/groupe/{id}/message', [messageController::class, 'store'])->name('message.store');
+
+
+
+
+
+
+    Route::get('Livewire', [Catalog::class, 'render'])->name('Livewire');
+
 });
 
 Route::get('signature', [cloudinary::class, 'getsignature']);
