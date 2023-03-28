@@ -20,7 +20,8 @@ class livresFactory extends Factory
             'title'=>fake()->word(),
             'isenabled'=>fake()->boolean,
             'description'=>fake()->text(100),
-            'id_cat'=>category::factory()
+            'image'=>'1679914452',
+            'category_id'=>category::factory()
         ];
     }
 }

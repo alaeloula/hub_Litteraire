@@ -1,4 +1,7 @@
 <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+
 <x-app-layout>
   <x-slot name="header">
     <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -20,7 +23,7 @@
       </div>
 
       <div class="mt-4 col-start-1 row-start-3 self-center sm:mt-0 sm:col-start-2 sm:row-start-2 sm:row-span-2 lg:mt-6 lg:col-start-1 lg:row-start-3 lg:row-end-4">
-        <button type="button" class="bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg">favorie</button>
+        <button type="button" value="{{$livre->id}}" id="favorie" class="bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg">favorie</button>
       </div>
       <p class="mt-4 text-sm leading-6 col-start-1 sm:col-span-2 lg:mt-6 lg:row-start-4 lg:col-span-1 dark:text-slate-400">
         {{$livre->description}}
@@ -31,3 +34,19 @@
   </main>
 
 </x-app-layout>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<script>
+   $('#favorie').on('click', function(event) {
+    alert(this.value)
+    $.ajax({
+    url: "{{ url('users/addFavorie') }}/" + this.value,
+    type: 'GET',
+    success: function(res) {
+      swal("Good job!", "You clicked the button!", "success"); 
+    }
+  })
+    })
+</script>

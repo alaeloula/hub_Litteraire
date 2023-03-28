@@ -13,6 +13,8 @@
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
 <script src="https://cdn.tailwindcss.com/3.2.4"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-4WpYBc10RJmCmrwSxMZmWlWL8JvLbTuD/1nI5K5oD8FvMssEHpGeKxjNcLFF+n8c22aw1gI59Sl0XKjJodkDvA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <script>
   tailwind.config = {
     darkMode: "class",

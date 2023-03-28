@@ -13,6 +13,8 @@ use App\Http\Controllers\LikeController;
 use App\Http\Livewire\SearchLivres;
 use App\Http\Livewire\Catalog;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +34,8 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $users = App\Models\user::with('Roles')->where('id',Auth::user()->id)->get();
+    return view('dashboard')->with('users', $users);;
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
@@ -67,7 +70,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware('role:admin')->group(function () {
     Route::resource('livres', LivreController::class);
     Route::resource('cats', CategoryController::class);
-    Route::get('/gestion', [AdminGestionController::class, 'user']);
+    Route::get('/gestion', [AdminGestionController::class, 'user'])->name('gestion');;
 });
 
 Route::middleware('auth')->group(function () {
@@ -77,6 +80,8 @@ Route::middleware('auth')->group(function () {
     Route::get('users/search/{search}', [UserController::class, 'search'])->name('users/search');
 
     Route::get('users/favorie', [favorieController::class, 'index'])->name('users/favorie');
+    Route::get('users/addFavorie/{id}', [favorieController::class, 'addFavorie'])->name('users/addFavorie');
+
 
 
     Route::get('/show/{id}', [GroupeController::class, 'show'])->name('groupe');

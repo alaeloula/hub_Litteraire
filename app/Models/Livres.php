@@ -12,7 +12,7 @@ class Livres extends Model
     protected $guarded=[];
     public function category()
     {
-        return $this->belongsTo(Category::class,'id_cat');
+        return $this->belongsTo(Category::class);
     }
     public function favories()
     {

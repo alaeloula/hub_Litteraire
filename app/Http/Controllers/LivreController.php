@@ -29,7 +29,7 @@ class LivreController extends Controller
      */
     public function create()
     {
-        return view('livres.create');
+        return view('livres.create',['cats' => Category::all()]);
         
     }
 
@@ -39,11 +39,21 @@ class LivreController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title'=> 'required',  
+            'title'=> 'required',
+            'description'=> 'required',  
         ]);
 
         $livreModel =new Livres();
         $livreModel->title=strip_tags($request->input('title'));
+        $livreModel->description=strip_tags($request->input('description'));
+        $livreModel->category_id=strip_tags($request->input('category'));
+        $livreModel->isenabled=1;
+
+        if ($request->hasFile('image')) {
+            $imageName = time().'.'.request()->image->getClientOriginalExtension();     
+            request()->image->move(public_path('images'), $imageName);
+            $livreModel->image = $imageName;
+        }
         $livreModel->save();
         return redirect(route('livres.index'));
     }

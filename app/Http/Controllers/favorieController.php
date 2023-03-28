@@ -15,4 +15,11 @@ class favorieController extends Controller
             'livres'=>favorie::with('Livres')->where('user_id',Auth::user()->id)->get(),
         ]);
     }
+    public function addFavorie($id)
+    {
+        $favorieModel =new favorie();
+        $favorieModel->user_id=Auth::user()->id;
+        $favorieModel->livres_id=$id;
+        $favorieModel->save();
+    }
 }

@@ -43,8 +43,17 @@ class UserController extends Controller
 
     public function search(string $search)
     {
-       $test= Livres::with('category')->where('title',$search)->get();
-       echo json_encode($test);
+    //    $test= Livres::with('category')->where('title','LIKE','%'.$search.'%')->get();
+    //    echo json_encode($test);
+
+    $test = Livres::with('category')
+             ->where('title', 'LIKE', '%'.$search.'%')
+             ->orwhere('created_at', $search)
+             ->orwhereHas('category', function ($query) use ($search) {
+                $query->where('title', 'LIKE', '%'.$search.'%');
+            })
+             ->get();
+             echo json_encode($test);
     }
 
 

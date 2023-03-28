@@ -80,15 +80,18 @@
   let likes = document.querySelectorAll('.like')
   likes.forEach(function(elm, index) {
     elm.addEventListener('click', function() {
+      let likeBtn = this;
       $.ajax({
         url: 'users/like/' + this.value,
         type: 'GET',
         success: function(res) {
+          var svg = likeBtn.querySelector('svg');
+          var path = svg.querySelector('path');
+          path.setAttribute('fill', 'red');
+          // elm.classList.add('bg-red-900')
 
-          elm.classList.add('bg-red-900')
-
-          let btn = $('.' + this.value);
-          btn.setAttribute('fill', 'RED')
+          // let btn = $('.' + this.value);
+          // btn.setAttribute('fill', 'RED')
           //  document.getElementById(id).innerHTML = Number(document.getElementById(id).innerHTML) +1;        
         }
       })
